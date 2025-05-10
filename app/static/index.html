@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Flask API</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 15px;
+            overflow: auto;
+        }
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        .endpoint {
+            margin-bottom: 20px;
+        }
+        .method {
+            display: inline-block;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .get {
+            background-color: #61affe;
+            color: white;
+        }
+        .post {
+            background-color: #49cc90;
+            color: white;
+        }
+        .put {
+            background-color: #fca130;
+            color: white;
+        }
+        .delete {
+            background-color: #f93e3e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Flask API</h1>
+    
+    <p>This is a RESTful API built with Flask, SQLAlchemy, and JWT authentication.</p>
+    
+    <h2>API Endpoints</h2>
+    
+    <div class="endpoint">
+        <h3>Authentication</h3>
+        <div>
+            <span class="method post">POST</span>
+            <code>/api/v1/login</code>
+        </div>
+        <p>Login and get an access token.</p>
+        <pre><code>{
+  "email": "user@example.com",
+  "password": "password"
+}</code></pre>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Users</h3>
+        <div>
+            <span class="method get">GET</span>
+            <code>/api/v1/users</code>
+        </div>
+        <p>Get all users (admin only).</p>
+        
+        <div>
+            <span class="method post">POST</span>
+            <code>/api/v1/users</code>
+        </div>
+        <p>Create a new user.</p>
+        <pre><code>{
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "password": "password123"
+}</code></pre>
+        
+        <div>
+            <span class="method get">GET</span>
+            <code>/api/v1/users/{user_id}</code>
+        </div>
+        <p>Get a specific user.</p>
+        
+        <div>
+            <span class="method put">PUT</span>
+            <code>/api/v1/users/{user_id}</code>
+        </div>
+        <p>Update a specific user.</p>
+        
+        <div>
+            <span class="method delete">DELETE</span>
+            <code>/api/v1/users/{user_id}</code>
+        </div>
+        <p>Delete a specific user.</p>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Items</h3>
+        <div>
+            <span class="method get">GET</span>
+            <code>/api/v1/items</code>
+        </div>
+        <p>Get all items (filtered based on user role).</p>
+        
+        <div>
+            <span class="method post">POST</span>
+            <code>/api/v1/items</code>
+        </div>
+        <p>Create a new item.</p>
+        <pre><code>{
+  "name": "New Item",
+  "description": "This is a new item",
+  "price": 29.99,
+  "quantity": 10
+}</code></pre>
+        
+        <div>
+            <span class="method get">GET</span>
+            <code>/api/v1/items/{item_id}</code>
+        </div>
+        <p>Get a specific item.</p>
+        
+        <div>
+            <span class="method put">PUT</span>
+            <code>/api/v1/items/{item_id}</code>
+        </div>
+        <p>Update a specific item.</p>
+        
+        <div>
+            <span class="method delete">DELETE</span>
+            <code>/api/v1/items/{item_id}</code>
+        </div>
+        <p>Delete a specific item.</p>
+    </div>
+    
+    <h2>Authentication</h2>
+    <p>For protected endpoints, include the access token in the Authorization header:</p>
+    <pre><code>Authorization: Bearer YOUR_ACCESS_TOKEN</code></pre>
+    
+</body>
+</html> 
