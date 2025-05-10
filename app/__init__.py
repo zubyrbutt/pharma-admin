@@ -14,7 +14,7 @@ jwt = JWTManager()
 
 # Configure Swagger UI
 SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI
-API_URL = '/api/v1/swagger.json'  # URL to access our OpenAPI definition
+API_URL = '/swagger.json'  # URL to access our OpenAPI definition
 
 
 def create_app(config_name='default'):

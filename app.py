@@ -13,6 +13,24 @@ from app.models.pharmaceutical import Company, Drug, Brand, AdultDosage, Pediatr
 # Create Flask application
 app = create_app(os.getenv('FLASK_ENV', 'default'))
 
+# Direct route for swagger.json
+@app.route('/swagger.json')
+def serve_swagger():
+    # Get the absolute path to the swagger.json file
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    swagger_file = os.path.join(current_dir, 'app', 'static', 'swagger.json')
+    
+    # Read the file and return its contents
+    with open(swagger_file, 'r') as f:
+        swagger_data = json.load(f)
+    
+    return jsonify(swagger_data)
+
+# Redirect to Swagger UI
+@app.route('/api/docs')
+def swagger_ui():
+    return redirect('/api/docs/')
+
 # Admin login required decorator
 def admin_login_required(f):
     @wraps(f)
