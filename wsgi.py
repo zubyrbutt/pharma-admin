@@ -5,11 +5,8 @@ from app import create_app
 env = os.getenv('FLASK_ENV', 'production')
 app = create_app(env)
 
-# Create the Flask application instance
-application = app
-
 # For compatibility with common WSGI servers like Gunicorn
-app = application
+application = app  # This is for WSGI servers that look for 'application'
 
 if __name__ == "__main__":
-    app.run() 
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 10000))) 
