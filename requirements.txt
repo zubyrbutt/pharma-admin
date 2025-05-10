@@ -8,3 +8,4 @@ marshmallow==3.21.1
 pytest==8.1.1
 gunicorn==21.2.0
 flask-swagger-ui==4.11.1
+werkzeug==3.0.1
