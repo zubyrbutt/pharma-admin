@@ -57,4 +57,25 @@ logs/
 .vscode/
 *.swp
 *.swo
-.DS_Store 
+
+# Cookie files
+*_cookies.txt
+
+# macOS-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor-specific
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Flask secret key
+.env
+
+# Backups
+*.bak
+*~ 
