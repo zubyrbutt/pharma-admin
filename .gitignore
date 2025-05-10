@@ -78,4 +78,6 @@ logs/
 
 # Backups
 *.bak
-*~ 
+*~
+
+pharma_admin/ 
