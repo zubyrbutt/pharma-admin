@@ -43,10 +43,10 @@ coverage.xml
 instance/
 .webassets-cache
 
-# Database files
-*.db
-*.sqlite
-*.sqlite3
+# # Database files
+# *.db
+# *.sqlite
+# *.sqlite3
 
 # Logs
 logs/
