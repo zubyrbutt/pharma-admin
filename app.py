@@ -8,6 +8,7 @@ from functools import wraps
 from app import create_app, db
 from app.models.user import User
 from app.models.item import Item
+from app.models.pharmaceutical import Company, Drug, Brand, AdultDosage, PediatricDosage, NeonatalDosage
 
 # Create Flask application
 app = create_app(os.getenv('FLASK_ENV', 'default'))
@@ -88,16 +89,16 @@ def admin_dashboard():
     item_count = Item.query.count()
     active_users = User.query.filter_by(active=True).count()
     
-    # Load all pharmaceutical data without limits
-    companies = load_json_data('json_data/COMPANY.json')
-    brands = load_json_data('json_data/BRAND.json')
-    adult_dosages = load_json_data('json_data/adult.json')
-    pediatric_dosages = load_json_data('json_data/Paedriatic.json')
-    neonatal_dosages = load_json_data('json_data/Neonatal.json')
+    # Get pharmaceutical data from database
+    companies = Company.query.all()
+    brands = Brand.query.all()
+    adult_dosages = AdultDosage.query.all()
+    pediatric_dosages = PediatricDosage.query.all()
+    neonatal_dosages = NeonatalDosage.query.all()
     
     # Count total records
-    company_count = len(companies)
-    brand_count = len(brands)
+    company_count = Company.query.count()
+    brand_count = Brand.query.count()
     
     # Get all users and items
     users = User.query.all()

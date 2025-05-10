@@ -40,6 +40,14 @@
             min-height: 100vh;
         }
 
+        /* Initial section visibility - prevent flashing */
+        #companies-section, #brands-section, #dosages-section, #users-section, #settings-section {
+            display: none;
+        }
+        #dashboard-section {
+            display: block;
+        }
+        
         .sidebar {
             width: 250px;
             background-color: white;
@@ -604,12 +612,12 @@
                             </thead>
                             <tbody>
                                 {% for company in companies %}
-                                {% if company.NAME.strip() %}
+                                {% if company.name.strip() %}
                                 <tr>
-                                    <td>{{ company.ID }}</td>
-                                    <td>{{ company.NAME }}</td>
-                                    <td>{{ company.ADDRESS }}</td>
-                                    <td>{{ company.PHONE }}</td>
+                                    <td>{{ company.id }}</td>
+                                    <td>{{ company.name }}</td>
+                                    <td>{{ company.address }}</td>
+                                    <td>{{ company.code }}</td>
                                     <td class="action-btns">
                                         <button class="btn btn-sm btn-primary">
                                             <i class="fas fa-edit"></i>
@@ -653,9 +661,9 @@
                             <tbody>
                                 {% for brand in brands %}
                                 <tr>
-                                    <td>{{ brand.BID }}</td>
-                                    <td>{{ brand.BNAME }}</td>
-                                    <td>{{ brand.CID }}</td>
+                                    <td>{{ brand.id }}</td>
+                                    <td>{{ brand.name }}</td>
+                                    <td>{{ brand.company_id }}</td>
                                     <td class="action-btns">
                                         <button class="btn btn-sm btn-primary">
                                             <i class="fas fa-edit"></i>
@@ -706,11 +714,11 @@
                                 <tbody>
                                     {% for dosage in adult_dosages %}
                                     <tr>
-                                        <td>{{ dosage.DOSE }}</td>
-                                        <td>{{ dosage.SINGLE }}</td>
-                                        <td>{{ dosage.FREQ }}</td>
-                                        <td>{{ dosage.ROUTE }}</td>
-                                        <td>{{ dosage.INSTRUCTION }}</td>
+                                        <td>{{ dosage.dosage }}</td>
+                                        <td>{{ dosage.drug_id }}</td>
+                                        <td>{{ dosage.frequency }}</td>
+                                        <td>{{ dosage.route }}</td>
+                                        <td>{{ dosage.notes }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -732,11 +740,11 @@
                                 <tbody>
                                     {% for dosage in pediatric_dosages %}
                                     <tr>
-                                        <td>{{ dosage.DOSE }}</td>
-                                        <td>{{ dosage.SINGLE }}</td>
-                                        <td>{{ dosage.FREQ }}</td>
-                                        <td>{{ dosage.ROUTE }}</td>
-                                        <td>{{ dosage.INSTRUCTION }}</td>
+                                        <td>{{ dosage.dosage }}</td>
+                                        <td>{{ dosage.drug_id }}</td>
+                                        <td>{{ dosage.frequency }}</td>
+                                        <td>{{ dosage.route }}</td>
+                                        <td>{{ dosage.notes }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -758,11 +766,11 @@
                                 <tbody>
                                     {% for dosage in neonatal_dosages %}
                                     <tr>
-                                        <td>{{ dosage.DOSE }}</td>
-                                        <td>{{ dosage.SINGLE }}</td>
-                                        <td>{{ dosage.FREQ }}</td>
-                                        <td>{{ dosage.ROUTE }}</td>
-                                        <td>{{ dosage.INSTRUCTION }}</td>
+                                        <td>{{ dosage.dosage }}</td>
+                                        <td>{{ dosage.drug_id }}</td>
+                                        <td>{{ dosage.frequency }}</td>
+                                        <td>{{ dosage.route }}</td>
+                                        <td>{{ dosage.notes }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -868,12 +876,6 @@
             document.querySelectorAll('table tbody tr').forEach(row => {
                 row.dataset.filtered = 'visible';
             });
-            
-            // Hide all sections except dashboard
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-            });
-            document.getElementById('dashboard-section').style.display = 'block';
             
             // Wait a moment for DOM to be fully ready
             setTimeout(() => {
