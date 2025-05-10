@@ -1,0 +1,891 @@
+{
+  "info": {
+    "name": "Advanced Flask API",
+    "description": "A modern RESTful API built with Flask, SQLAlchemy, and JWT authentication",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Authentication operations",
+      "item": [
+        {
+          "name": "Login to get access token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "login"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "description": "User management operations",
+      "item": [
+        {
+          "name": "Get all users (admin only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create a new user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"secretpassword\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a specific user",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a user",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"johndoe_updated\",\n  \"email\": \"john_updated@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a user",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/users/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "users", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Items",
+      "description": "Item management operations",
+      "item": [
+        {
+          "name": "Get all items",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "items"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create a new item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Item\",\n  \"description\": \"This is a test item\",\n  \"price\": 19.99,\n  \"quantity\": 50,\n  \"user_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "items"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a specific item",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "items", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update an item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Item\",\n  \"description\": \"This item has been updated\",\n  \"price\": 29.99,\n  \"quantity\": 75\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "items", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete an item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "items", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "description": "Pharmaceutical company operations",
+      "item": [
+        {
+          "name": "Get all companies",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/companies",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "companies"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create a new company",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"PharmaCorp\",\n  \"code\": \"PC123\",\n  \"address\": \"123 Pharma Street\",\n  \"country\": \"USA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/companies",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "companies"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a specific company",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/companies/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "companies", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a company",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"PharmaCorp Updated\",\n  \"code\": \"PC456\",\n  \"address\": \"456 Updated Road\",\n  \"country\": \"Canada\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/companies/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "companies", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a company",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/companies/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "companies", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Drugs",
+      "description": "Drug information operations",
+      "item": [
+        {
+          "name": "Get all drugs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/drugs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "drugs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create a new drug",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Paracetamol\",\n  \"description\": \"Pain reliever and fever reducer\",\n  \"category\": \"Analgesic\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/drugs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "drugs"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a specific drug",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/drugs/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "drugs", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a drug",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Acetaminophen\",\n  \"description\": \"Updated description for pain reliever\",\n  \"category\": \"Analgesic/Antipyretic\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/drugs/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "drugs", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a drug",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/drugs/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "drugs", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Brands",
+      "description": "Brand management operations",
+      "item": [
+        {
+          "name": "Get all brands",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/brands",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "brands"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create a new brand",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Tylenol\",\n  \"strength\": \"500mg\",\n  \"form\": \"Tablet\",\n  \"package_size\": \"50 tablets\",\n  \"company_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/brands",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "brands"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a specific brand",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/brands/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "brands", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update a brand",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Tylenol Extra Strength\",\n  \"strength\": \"650mg\",\n  \"form\": \"Capsule\",\n  \"package_size\": \"30 capsules\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/brands/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "brands", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete a brand",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/brands/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "brands", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dosages",
+      "description": "Dosage information operations",
+      "item": [
+        {
+          "name": "Adult Dosages",
+          "item": [
+            {
+              "name": "Get all adult dosages",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/adult-dosages",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "adult-dosages"],
+                  "query": [
+                    {
+                      "key": "drug_id",
+                      "value": "1",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create a new adult dosage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"drug_id\": 1,\n  \"indication\": \"Pain relief\",\n  \"dosage\": \"650-1000mg\",\n  \"frequency\": \"Every 4-6 hours\",\n  \"route\": \"Oral\",\n  \"notes\": \"Do not exceed 4000mg in 24 hours\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/adult-dosages",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "adult-dosages"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get a specific adult dosage",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/adult-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "adult-dosages", "1"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update an adult dosage",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"indication\": \"Pain and fever relief\",\n  \"dosage\": \"500-1000mg\",\n  \"frequency\": \"Every 6 hours\",\n  \"notes\": \"Updated guidelines: Do not exceed 3000mg in 24 hours\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/adult-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "adult-dosages", "1"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete an adult dosage",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/adult-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "adult-dosages", "1"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Pediatric Dosages",
+          "item": [
+            {
+              "name": "Get all pediatric dosages",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/pediatric-dosages",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "pediatric-dosages"],
+                  "query": [
+                    {
+                      "key": "drug_id",
+                      "value": "1",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create a new pediatric dosage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"drug_id\": 1,\n  \"indication\": \"Fever\",\n  \"dosage\": \"10-15mg/kg\",\n  \"age_range\": \"2-11 years\",\n  \"frequency\": \"Every 4-6 hours\",\n  \"route\": \"Oral\",\n  \"notes\": \"Do not exceed 5 doses in 24 hours\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/pediatric-dosages",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "pediatric-dosages"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get a specific pediatric dosage",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/pediatric-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "pediatric-dosages", "1"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update a pediatric dosage",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"indication\": \"Fever and pain\",\n  \"dosage\": \"10-12mg/kg\",\n  \"age_range\": \"2-12 years\",\n  \"frequency\": \"Every 6 hours\",\n  \"notes\": \"Updated: Do not exceed 4 doses in 24 hours\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/pediatric-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "pediatric-dosages", "1"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete a pediatric dosage",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/pediatric-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "pediatric-dosages", "1"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Neonatal Dosages",
+          "item": [
+            {
+              "name": "Get all neonatal dosages",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/neonatal-dosages",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "neonatal-dosages"],
+                  "query": [
+                    {
+                      "key": "drug_id",
+                      "value": "1",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create a new neonatal dosage",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"drug_id\": 1,\n  \"indication\": \"Fever\",\n  \"dosage\": \"10mg/kg\",\n  \"age_range\": \"0-28 days\",\n  \"frequency\": \"Every 6-8 hours\",\n  \"route\": \"Oral\",\n  \"notes\": \"Consult pediatrician before administration\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/neonatal-dosages",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "neonatal-dosages"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get a specific neonatal dosage",
+              "request": {
+                "method": "GET",
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/neonatal-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "neonatal-dosages", "1"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update a neonatal dosage",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"indication\": \"Mild to moderate pain\",\n  \"dosage\": \"5-10mg/kg\",\n  \"age_range\": \"0-28 days\",\n  \"frequency\": \"Every 8 hours\",\n  \"notes\": \"Updated: Maximum 3 doses per day. Administer under medical supervision.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/neonatal-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "neonatal-dosages", "1"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete a neonatal dosage",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/v1/neonatal-dosages/1",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "v1", "neonatal-dosages", "1"]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5050"
+    },
+    {
+      "key": "accessToken",
+      "value": "YOUR_ACCESS_TOKEN"
+    }
+  ]
+} 
