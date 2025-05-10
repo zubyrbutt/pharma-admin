@@ -3,109 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Flask API</title>
+    <title>Pharma Admin - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --dark: #111827;
+            --light: #f9fafb;
+            --gray: #9ca3af;
+            --gray-light: #e5e7eb;
+            --gray-dark: #4b5563;
+            --danger: #ef4444;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: var(--dark);
+            height: 100vh;
             display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            display: flex;
+            width: 900px;
+            height: 600px;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .login-image {
+            width: 50%;
+            background-image: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-        }
-        .login-container {
-            background-color: white;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
+            color: white;
+            position: relative;
         }
-        h1 {
-            color: #2c3e50;
-            margin-top: 0;
+
+        .login-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .tagline {
+            font-size: 1.125rem;
             text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-form {
+            width: 50%;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-form h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .login-form p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
             margin-bottom: 1.5rem;
         }
-        .form-group {
-            margin-bottom: 1rem;
-        }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
+            font-size: 0.875rem;
+            color: var(--gray-dark);
         }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
         input[type="email"],
         input[type="password"] {
             width: 100%;
-            padding: 0.75rem;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: border-color 0.2s;
         }
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #3498db;
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .forget-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .forget-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            background-color: var(--primary);
             color: white;
             border: none;
-            border-radius: 4px;
-            font-size: 1rem;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.2s;
+            margin-bottom: 1.5rem;
         }
-        .submit-btn:hover {
-            background-color: #2980b9;
+
+        .login-btn:hover {
+            background-color: var(--primary-dark);
         }
+
         .error-message {
-            color: #e74c3c;
-            margin-top: 1rem;
-            text-align: center;
+            background-color: #fee2e2;
+            color: #ef4444;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
         }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 1rem;
-            color: #7f8c8d;
-            text-decoration: none;
-        }
-        .back-link:hover {
-            color: #34495e;
+
+        @media (max-width: 767.98px) {
+            .login-container {
+                flex-direction: column;
+                width: 90%;
+                height: auto;
+            }
+
+            .login-image,
+            .login-form {
+                width: 100%;
+            }
+
+            .login-image {
+                padding: 2rem;
+                height: 200px;
+            }
+
+            .login-form {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h1>Admin Login</h1>
-        
-        {% if error %}
-        <div class="error-message">
-            {{ error }}
+        <div class="login-image">
+            <div class="logo">
+                <i class="fas fa-pills"></i>
+                <h1>Pharma Admin</h1>
+            </div>
+            <p class="tagline">Manage pharmaceutical data with ease and efficiency</p>
         </div>
-        {% endif %}
-        
-        <form method="post" action="{{ url_for('admin_login') }}">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+        <div class="login-form">
+            <h2>Welcome back</h2>
+            <p>Please sign in to your admin account</p>
             
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+            {% if error %}
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> {{ error }}
             </div>
+            {% endif %}
             
-            <button type="submit" class="submit-btn">Login</button>
-        </form>
-        
-        <a href="/" class="back-link">Back to Home</a>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember" style="margin-bottom: 0;">Remember me</label>
+                    </div>
+                    <a href="#" class="forget-link">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Sign In</button>
+                
+                <p style="text-align: center; font-size: 0.875rem; color: var(--gray);">
+                    Need assistance? Contact system administrator
+                </p>
+            </form>
+        </div>
     </div>
 </body>
 </html> 

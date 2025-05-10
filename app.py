@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask, jsonify, send_from_directory, render_template, request, redirect, url_for, session, flash
 from flask_restful import Api
 from werkzeug.security import check_password_hash
@@ -19,6 +20,16 @@ def admin_login_required(f):
             return redirect(url_for('admin_login'))
         return f(*args, **kwargs)
     return decorated_function
+
+# Load JSON data function
+def load_json_data(file_path, limit=None):
+    try:
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+            return data[:limit] if limit else data
+    except Exception as e:
+        print(f"Error loading JSON file {file_path}: {e}")
+        return []
 
 # Routes
 @app.route('/')
@@ -68,7 +79,7 @@ def admin_login():
 @app.route('/admin/dashboard')
 @admin_login_required
 def admin_dashboard():
-    """Admin dashboard."""
+    """Admin dashboard with pharmaceutical data."""
     # Get current user
     user = User.query.get(session['user_id'])
     
@@ -76,6 +87,17 @@ def admin_dashboard():
     user_count = User.query.count()
     item_count = Item.query.count()
     active_users = User.query.filter_by(active=True).count()
+    
+    # Load all pharmaceutical data without limits
+    companies = load_json_data('json_data/COMPANY.json')
+    brands = load_json_data('json_data/BRAND.json')
+    adult_dosages = load_json_data('json_data/adult.json')
+    pediatric_dosages = load_json_data('json_data/Paedriatic.json')
+    neonatal_dosages = load_json_data('json_data/Neonatal.json')
+    
+    # Count total records
+    company_count = len(companies)
+    brand_count = len(brands)
     
     # Get all users and items
     users = User.query.all()
@@ -87,7 +109,14 @@ def admin_dashboard():
                            item_count=item_count, 
                            active_users=active_users,
                            users=users,
-                           items=items)
+                           items=items,
+                           companies=companies,
+                           brands=brands,
+                           adult_dosages=adult_dosages,
+                           pediatric_dosages=pediatric_dosages,
+                           neonatal_dosages=neonatal_dosages,
+                           company_count=company_count,
+                           brand_count=brand_count)
 
 @app.route('/admin/logout')
 def admin_logout():
